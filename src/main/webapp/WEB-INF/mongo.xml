@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.food.connector" />
+
+	<bean
+		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+
+    <bean id="mongoClient" factory-bean="dbconn" factory-method="getMongoReplicaInstance1">
+     </bean>
+<!--	<bean id="propertyConfigurer" class="com.til.bp.utils.ExposablePropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="morphia" class="org.mongodb.morphia.Morphia" />
+
+	<bean id="mongoClient" factory-bean="dbconn" factory-method="getMongoReplicaInstance1">
+		<constructor-arg index="0">
+			<list value-type="com.mongodb.ServerAddress">
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.112" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.114" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.113" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.111" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.253" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="datastore" factory-bean="morphia" factory-method="createDatastore">
+		<constructor-arg ref="mongoClient" />
+		<constructor-arg value="behaviorlog" />
+	</bean>
+
+	<bean id="mongoClientDup" factory-bean="dbconn"
+		factory-method="getMongoReplicaInstance1Dup">
+		<constructor-arg index="0">
+			<list value-type="com.mongodb.ServerAddress">
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.112" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.114" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.113" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.111" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.253" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="datastoredup" factory-bean="morphia" factory-method="createDatastore">
+		<constructor-arg ref="mongoClientDup" />
+		<constructor-arg value="behaviorlog" />
+	</bean>
+
+	&lt;!&ndash; new configuration to convert 164 into replica &ndash;&gt;
+	<bean id="mongoClient164" factory-bean="dbconn" factory-method="getMongoRepliaInstance2">
+		<constructor-arg index="0">
+			<list value-type="com.mongodb.ServerAddress">
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.26.164" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.240" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.33.93" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="datastore164" factory-bean="morphia" factory-method="createDatastore">
+		<constructor-arg ref="mongoClient164" />
+		<constructor-arg value="behaviorlog" />
+	</bean>
+
+	&lt;!&ndash; new mongodb replica &ndash;&gt;
+	<bean id="mongoClient3" factory-bean="dbconn" factory-method="getMongoRepliaInstance3">
+		<constructor-arg index="0">
+			<list value-type="com.mongodb.ServerAddress">
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.34.71" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.34.72" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+				<bean class="com.mongodb.ServerAddress">
+					<constructor-arg index="0" value="192.168.34.161" />
+					<constructor-arg index="1" value="27017" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="datastore3" factory-bean="morphia" factory-method="createDatastore">
+		<constructor-arg ref="mongoClient3" />
+		<constructor-arg value="behaviorlog" />
+	</bean>-->
+</beans>
