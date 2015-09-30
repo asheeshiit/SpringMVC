@@ -6,10 +6,7 @@ import gajju.food.utils.MongoUtils;
 import jxl.Cell;
 import jxl.Sheet;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Asheesh.Mahor on 24-09-2015.
@@ -22,16 +19,17 @@ public class InsertItemDataFromExcelSheet {
 
         DBCollection dbCollection = MongoUtils.getMongoInstance(hostAddress).getDB(ItemDetail.DB).getCollection(ItemDetail.TABALE_NAME);
         Sheet sheet = CSVnExcelUtils.getExcelSheet(filepath);
-        List<String> fields = new ArrayList<String>();
+//        List<String> fields = new ArrayList<String>();
+        Map<Integer,String> fields = new HashMap<Integer, String>();
 
         for (int i = 0; i < sheet.getRows(); i++) {
             BasicDBObject basicDBObject = new BasicDBObject();
         for (int j = 0; j < sheet.getColumns(); j++) {
             Cell cell = sheet.getCell(j, i);
             if(i==0) {
-                    fields.add(cell.getContents().trim());
+                fields.put(j,cell.getContents().trim());
                 }else{
-                basicDBObject.put(fields.get(j), cell.getContents());
+                basicDBObject.put(fields.get(j).trim(), cell.getContents());
                 }
 
             }
