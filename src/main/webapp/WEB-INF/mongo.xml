@@ -18,6 +18,9 @@
 
     <bean id="mongoClient" factory-bean="dbconn" factory-method="getMongoReplicaInstance1">
      </bean>
+
+        <bean id="solrServer" factory-bean="solrconnet" factory-method="getSolrServerInstance">
+    </bean>
 <!--	<bean id="propertyConfigurer" class="com.til.bp.utils.ExposablePropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
